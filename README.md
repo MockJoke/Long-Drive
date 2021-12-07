@@ -1,10 +1,10 @@
-## Long Drive (WIP)
+# Long Drive (WIP)
 
 An endless longdrive game I've created, 
 because personally when I'm on a long drive on my cycle it's so hard for me when to finish it and return back home
 
 
-# Gameplay
+## Gameplay
 
 It is still in the development but the basic gameplay is something like this:
 - From the garage, you get to choose the car you want to drive. 
@@ -12,13 +12,13 @@ It is still in the development but the basic gameplay is something like this:
 - To not end your long drive, you need to maintain the health of your car by avoid colliding with other vehicles and collecting fuel cans. 
 
 
-# Features 
+## Features 
 
 - Different cars can be chosen from the garage system. (The money system is still in progress for the garage system)
 - Car can be controlled via different input systems 1.buttons(pc&mobile) 2.keyboard keys(pc) 3.touch(mobile) 4.sensor(mobile) 
 - You can also accelerate or deaccelerate the car
 
-# Demo
+## Demo
 
 ![Home](READMEresources/Home.png)             ![Settings](READMEresources/Settings.png)
 
