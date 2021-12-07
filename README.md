@@ -1,6 +1,6 @@
 # Long Drive (WIP)
 
-An endless longdrive game I've created, 
+An endless longdrive car game I've created, 
 because personally when I'm on a long drive on my cycle it's so hard for me when to finish it and return back home
 
 
