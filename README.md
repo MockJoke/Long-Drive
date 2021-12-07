@@ -24,4 +24,4 @@ It is still in the development but the basic gameplay is something like this:
 
 https://user-images.githubusercontent.com/42877499/145081422-d29a8b6e-bc0c-45b3-88fa-059ba84e573f.mp4 
 
-![Gameplay](READMEresources/LongDrive_gameplay.mp4)
+https://user-images.githubusercontent.com/42877499/145082947-3083b4dd-4243-4ea3-acca-5bfad5343fc3.mp4
