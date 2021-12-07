@@ -22,6 +22,6 @@ It is still in the development but the basic gameplay is something like this:
 
 ![Home](READMEresources/Home.png)             ![Settings](READMEresources/Settings.png)
 
-![Garage](https://github.com/MockJoke/CarRace/blob/main/READMEresources/LongDrive_garage.mp4) 
+![Garage](https://user-images.githubusercontent.com/42877499/145081422-d29a8b6e-bc0c-45b3-88fa-059ba84e573f.mp4) 
 
 ![Gameplay](READMEresources/LongDrive_gameplay.mp4)
