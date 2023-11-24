@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GenerateObjects : MonoBehaviour
 {
@@ -8,12 +6,10 @@ public class GenerateObjects : MonoBehaviour
     public GameObject Obstacles;
     public float speed = 0.01f;
 
-    // Start is called before the first frame update
     void Start()
     {
         //Instantiate(EnemyCar[i], GenerateCars.transform); 
-        InvokeRepeating("GenerateEnemyCar", 0f, 5f);
-
+        InvokeRepeating(nameof(GenerateEnemyCar), 0f, 5f);
     }
 
     public void GenerateEnemyCar()
@@ -24,22 +20,6 @@ public class GenerateObjects : MonoBehaviour
         GenerateCars.transform.SetParent(Obstacles.transform);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        //if (accelerating)
-        //{
-        //    AccelerateCar();
-        //    print("speed" + speed);
-        //}
-        //else if (deaccelerating)
-        //{
-        //    DeaccelerateCar();
-        //    print("speed" + speed);
-        //}
-  
-    }
-
     public void AccelerateCar()
     {
         speed += 0.01f;
@@ -48,10 +28,9 @@ public class GenerateObjects : MonoBehaviour
         {
             enemy.GetComponent<MoveObj>().speed = speed;  //to stop already generated enemy cars by making its speed 0
         }
-    
     }
 
-    public void DeaccelerateCar()
+    public void DecelerateCar()
     {
         if(speed>0.01f)
         {
@@ -68,5 +47,4 @@ public class GenerateObjects : MonoBehaviour
             enemy.GetComponent<MoveObj>().speed = speed;  //to stop already generated enemy cars by making its speed 0
         }
     }
-
 }

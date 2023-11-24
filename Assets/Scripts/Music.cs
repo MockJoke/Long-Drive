@@ -1,16 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿using UnityEngine;
 
 public class Music : MonoBehaviour
 {
     AudioSource BgMusic;
     private static Music instance = null;
-    public static Music Instance
-    {
-        get { return instance; }
-    }
+    public static Music Instance => instance;
 
     void Awake()
     {
@@ -31,12 +25,6 @@ public class Music : MonoBehaviour
     void Start()
     {
         BgMusic = GetComponent<AudioSource>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void BgMusicSwitch(bool value)

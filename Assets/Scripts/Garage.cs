@@ -1,16 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class Garage : MonoBehaviour
 {
-    public GameObject[] CarList;
-    public Text AccountBoard; 
-    public int AccountBalance, CurrentCar = 0;
+    [SerializeField] private GameObject[] CarList;
+    [SerializeField] private Text AccountBoard; 
+    private int AccountBalance, CurrentCar = 0;
 
-    // Start is called before the first frame update
     void Start()
     {
         AccountBalance = PlayerPrefs.GetInt("AccountBalance");
@@ -23,10 +20,8 @@ public class Garage : MonoBehaviour
         }
 
         ShowCar(CurrentCar); 
-        
     }
 
-    // Update is called once per frame
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.RightArrow))
@@ -41,10 +36,9 @@ public class Garage : MonoBehaviour
         }
 
         PlayerPrefs.SetInt("CurrentCar", CurrentCar);
-
     }
 
-    public void ShowCar(int CarNo)
+    private void ShowCar(int CarNo)
     {
         if(CarNo >= CarList.Length)
         {
@@ -55,7 +49,6 @@ public class Garage : MonoBehaviour
         {
             CarNo = CarList.Length;
             CurrentCar = CarNo;
-
         }
 
         foreach (GameObject ChosenCar in CarList)
@@ -64,7 +57,6 @@ public class Garage : MonoBehaviour
         }
 
         CarList[CarNo].SetActive(true);
-
     }
 
     public void ShowNext()
