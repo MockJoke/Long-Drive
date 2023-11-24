@@ -40,23 +40,27 @@ public class Garage : MonoBehaviour
 
     private void ShowCar(int CarNo)
     {
-        if(CarNo >= CarList.Length)
+        if(CarNo >= CarList.Length - 1)
         {
             CarNo = 0;
             CurrentCar = CarNo;
         }
         else if(CarNo < 0)
         {
-            CarNo = CarList.Length;
+            CarNo = CarList.Length - 1;
             CurrentCar = CarNo;
         }
-
+        else
+        {
+            CurrentCar = CarNo;
+        }
+        
         foreach (GameObject ChosenCar in CarList)
         {
             ChosenCar.SetActive(false);
         }
 
-        CarList[CarNo].SetActive(true);
+        CarList[CurrentCar].SetActive(true);
     }
 
     public void ShowNext()

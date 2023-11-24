@@ -115,13 +115,13 @@ public class PlayerCar : MonoBehaviour
         }
 
         GameTime += Time.deltaTime;
-        //GameTime = (int)Time.time; 
+        // GameTime = (int)Time.time; 
         score = (int)GameTime;
         
-        //AccountBalance += money;
-        //PlayerPrefs.SetInt("AccountBalance", AccountBalance);
+        // AccountBalance += money;
+        // PlayerPrefs.SetInt("AccountBalance", AccountBalance);
 
-        print(Mathf.FloorToInt(GameTime));
+        // print(Mathf.FloorToInt(GameTime));
     }
 
     public void RetryBtn()
