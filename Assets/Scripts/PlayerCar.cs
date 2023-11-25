@@ -19,7 +19,7 @@ public class PlayerCar : MonoBehaviour
     private float GameTime;
     [SerializeField] private Text ScoreBoard, MoneyReceived; 
     
-    [SerializeField] private healthbar healthBar;
+    [SerializeField] private HealthBar healthBar;
     [SerializeField] private SpriteRenderer CarImage; 
 
     //public AudioSource Audio; 

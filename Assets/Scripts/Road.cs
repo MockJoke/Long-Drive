@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class road : MonoBehaviour
+public class Road : MonoBehaviour
 {
     [SerializeField] private Renderer Roads;
     private float y;
