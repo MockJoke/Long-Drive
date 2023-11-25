@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -6,14 +7,14 @@ public class Garage : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer PlayerCar;
     [SerializeField] private Sprite[] CarSprites;
-    [SerializeField] private Text AccountBoard;
-    private int AccountBalance = 0; 
+    [SerializeField] private TextMeshProUGUI Money;
+    private int AccountBalance = 0;
     private int CurrentCar = 0;
 
     void Start()
     {
         AccountBalance = PlayerPrefs.GetInt("AccountBalance");
-        AccountBoard.text = "AccountBalance: Rs " + AccountBalance; 
+        Money.text = "AccountBalance: Rs " + AccountBalance; 
         
         ShowCar(CurrentCar);
     }

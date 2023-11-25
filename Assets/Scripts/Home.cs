@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UnityEditor;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Home : MonoBehaviour
@@ -20,6 +21,10 @@ public class Home : MonoBehaviour
 
     public void QuitBtn()
     {
-        Application.Quit();
+#if UNITY_EDITOR 
+        EditorApplication.isPlaying = false;
+#else 
+		Application.Quit();
+#endif
     }
 }

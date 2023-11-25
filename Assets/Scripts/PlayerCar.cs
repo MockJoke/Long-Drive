@@ -1,34 +1,47 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PlayerCar : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D MainCar;
-    [SerializeField] private GameObject can, RetryObj;
-    private int CurrentHealth; 
-    [SerializeField] private int MaxHealth = 10;
-    [SerializeField] private GameObject LeftBtn, RightBtn; 
-    private bool GoingLeft = false, GoingRight = false, CarMoving = false;
-    [SerializeField] private int controls, CurrentCar; 
-    private float CarRotation = 0f;
-    [SerializeField] private AudioSource sounds;
-    [SerializeField] private AudioClip CarCrash, ReFuel;
-    [SerializeField] private Sprite[] PlayerCars;
-    private int score, money, AccountBalance, speed; 
-    private float GameTime;
-    [SerializeField] private Text ScoreBoard, MoneyReceived; 
-    
-    [SerializeField] private HealthBar healthBar;
-    [SerializeField] private SpriteRenderer CarImage; 
+    [SerializeField] private GameObject GameplayCanvas; 
+    [SerializeField] private GameObject RetryCanvas;
 
+    [Header("Controls")] 
+    [SerializeField] private GameObject LeftTurnBtn; 
+    [SerializeField] private GameObject RightTurnBtn;
+    private int currControls = 0; 
+    private int currCar = 0;
+    private bool goingLeft = false;
+    private bool goingRight = false; 
+    private bool carMoving = false;
+    
+    private float carRotation = 0f;
+    
+    [Header("Info UI")]
+    [SerializeField] private int MaxHealth = 10;
+    [SerializeField] private HealthBar healthBar;
+    [SerializeField] private TextMeshProUGUI ScoreBoard; 
+    [SerializeField] private TextMeshProUGUI MoneyReceived; 
+    private int currHealth;
+    private int score, money, accountBalance, speed; 
+    private float GameTime;
+    
+    [SerializeField] private SpriteRenderer CarImage; 
+    [SerializeField] private Sprite[] PlayerCars;
+
+    [Header("Audio")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip CarCrash, ReFuel;
+    
     //public AudioSource Audio; 
     //public AudioClip CollisionSound, 
 
     void Start()
     {
-        if (sounds == null)
-            sounds = GetComponent<AudioSource>();
+        if (audioSource == null)
+            audioSource = GetComponent<AudioSource>();
         
         if (MainCar == null)
             MainCar = GetComponent<Rigidbody2D>();
@@ -36,47 +49,43 @@ public class PlayerCar : MonoBehaviour
         if (CarImage == null)
             CarImage = GetComponent<SpriteRenderer>();
         
-        controls = PlayerPrefs.GetInt("controls");
+        currControls = PlayerPrefs.GetInt("controls");
 
-        CurrentHealth = MaxHealth;
+        currHealth = MaxHealth;
         healthBar.SetMaxHealth(MaxHealth);
 
-        CurrentCar = PlayerPrefs.GetInt("CurrentCar");
-        AccountBalance = PlayerPrefs.GetInt("AccountBalance", 0);
+        currCar = PlayerPrefs.GetInt("CurrentCar");
+        accountBalance = PlayerPrefs.GetInt("AccountBalance", 0);
     }
 
     void Update()
     {
-        CarImage.sprite = PlayerCars[CurrentCar];
+        CarImage.sprite = PlayerCars[currCar];
 
-        if (controls == 1)
+        switch (currControls)
         {
-            LeftBtn.SetActive(true);
-            RightBtn.SetActive(true);
+            case 1:
+                LeftTurnBtn.SetActive(true);
+                RightTurnBtn.SetActive(true);
+                break;
+            case 2:
+                MoveOnKeys(); 
+                LeftTurnBtn.SetActive(false);
+                RightTurnBtn.SetActive(false);
+                break;
+            case 3:
+                MoveOnTouch();
+                LeftTurnBtn.SetActive(false);
+                RightTurnBtn.SetActive(false);
+                break;
+            default:
+                MoveOnSensor(); 
+                LeftTurnBtn.SetActive(false);
+                RightTurnBtn.SetActive(false);
+                break;
         }
 
-        else if (controls == 2)
-        {
-            MoveOnKeys(); 
-            LeftBtn.SetActive(false);
-            RightBtn.SetActive(false);
-        }
-
-        else if (controls == 3)
-        {
-            MoveOnTouch();
-            LeftBtn.SetActive(false);
-            RightBtn.SetActive(false);
-        }
-
-        else
-        {
-            MoveOnSensor(); 
-            LeftBtn.SetActive(false);
-            RightBtn.SetActive(false);
-        }
-
-        if (CurrentHealth == 0)
+        if (currHealth == 0)
         {
             Time.timeScale = 0; //to make game into pause mode 
             GameObject[] Enemies = GameObject.FindGameObjectsWithTag("Enemy");
@@ -85,9 +94,9 @@ public class PlayerCar : MonoBehaviour
                 enemy.GetComponent<MoveObj>().speed = 0f;  //to stop already generated enemy cars by making its speed 0
             }
 
-            can.GetComponent<CanvasGroup>().interactable = false;
+            GameplayCanvas.GetComponent<CanvasGroup>().interactable = false;
 
-            RetryObj.SetActive(true);
+            RetryCanvas.SetActive(true);
 
             ScoreBoard.text = "SCORE: " + score;
 
@@ -95,17 +104,17 @@ public class PlayerCar : MonoBehaviour
             MoneyReceived.text = "Money: Rs" + money;
         }
 
-        if(GoingLeft)
+        if(goingLeft)
         {
             LeftSide();
         }
 
-        if(GoingRight)
+        if(goingRight)
         {
             RightSide(); 
         }
 
-        if(CarMoving)
+        if(carMoving)
         {
             RotateCar();
         }
@@ -126,11 +135,11 @@ public class PlayerCar : MonoBehaviour
 
     public void RetryBtn()
     {
-        AccountBalance = AccountBalance + money;
-        PlayerPrefs.SetInt("AccountBalance", AccountBalance);
-        RetryObj.SetActive(false);
+        accountBalance = accountBalance + money;
+        PlayerPrefs.SetInt("AccountBalance", accountBalance);
+        RetryCanvas.SetActive(false);
 
-        can.GetComponent<CanvasGroup>().interactable = true;
+        GameplayCanvas.GetComponent<CanvasGroup>().interactable = true;
         SceneManager.LoadScene("Play");
 
         GameTime = 0;
@@ -166,17 +175,16 @@ public class PlayerCar : MonoBehaviour
         {
             score--;
             PlayerPrefs.SetInt("score", score); 
-            CurrentHealth -= 2;
-            healthBar.SetHealth(CurrentHealth);
-            sounds.clip = CarCrash;
-            sounds.Play(); 
+            currHealth -= 2;
+            healthBar.SetHealth(currHealth);
+            audioSource.clip = CarCrash;
+            audioSource.Play(); 
 
-            if(CurrentHealth != 0)
+            if(currHealth != 0)
             {
                 Destroy(collision.gameObject); 
             }
             
-
             //Time.timeScale = 0; //to make game into pause mode 
             //GameObject[] Enemies = GameObject.FindGameObjectsWithTag("Enemy");
             //foreach (GameObject enemy in Enemies)
@@ -187,19 +195,19 @@ public class PlayerCar : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Fuel"))
         {
-            if(CurrentHealth<MaxHealth)
+            if(currHealth<MaxHealth)
             {
-                CurrentHealth += 1;
-                healthBar.SetHealth(CurrentHealth);
+                currHealth += 1;
+                healthBar.SetHealth(currHealth);
             }
             else
             {
-                CurrentHealth = MaxHealth;
-                healthBar.SetHealth(CurrentHealth);
+                currHealth = MaxHealth;
+                healthBar.SetHealth(currHealth);
             }
 
-            sounds.clip = ReFuel;
-            sounds.Play(); 
+            audioSource.clip = ReFuel;
+            audioSource.Play(); 
 
             Destroy(collision.gameObject);
         }
@@ -213,26 +221,26 @@ public class PlayerCar : MonoBehaviour
 
     public void LeftBtnDown()
     {
-        GoingLeft = true;
-        CarMoving = true; 
+        goingLeft = true;
+        carMoving = true; 
     }
 
     public void LeftBtnUp()
     {
-        GoingLeft = false;
-        CarMoving = false; 
+        goingLeft = false;
+        carMoving = false; 
     }
 
     public void RightBtnDown()
     {
-        GoingRight = true;
-        CarMoving = true; 
+        goingRight = true;
+        carMoving = true; 
     }
 
     public void RightBtnUp()
     {
-        GoingRight = false;
-        CarMoving = false; 
+        goingRight = false;
+        carMoving = false; 
     }
 
     private void MoveOnKeys()
@@ -240,20 +248,20 @@ public class PlayerCar : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             LeftSide();
-            CarMoving = true;
-            GoingLeft = true;
+            carMoving = true;
+            goingLeft = true;
         }
         else if (Input.GetKey(KeyCode.RightArrow))
         {
             RightSide();
-            CarMoving = true;
-            GoingRight = true;
+            carMoving = true;
+            goingRight = true;
         }
         else
         {
-            CarMoving = false;
-            GoingLeft = false;
-            GoingRight = false;
+            carMoving = false;
+            goingLeft = false;
+            goingRight = false;
         }
     }
 
@@ -262,20 +270,20 @@ public class PlayerCar : MonoBehaviour
         if(Input.acceleration.x < -0.1f)
         {
             LeftSide();
-            CarMoving = true;
-            GoingLeft = true;
+            carMoving = true;
+            goingLeft = true;
         }
         else if(Input.acceleration.x > 0.1f)
         {
             RightSide();
-            CarMoving = true;
-            GoingRight = true;
+            carMoving = true;
+            goingRight = true;
         }
         else
         {
-            CarMoving = false;
-            GoingLeft = false;
-            GoingRight = false;
+            carMoving = false;
+            goingLeft = false;
+            goingRight = false;
         }
     }
 
@@ -289,41 +297,41 @@ public class PlayerCar : MonoBehaviour
             if(pos.x < divider)
             {
                 LeftSide();
-                CarMoving = true;
-                GoingLeft = true; 
+                carMoving = true;
+                goingLeft = true; 
             }
             else
             {
                 RightSide();
-                CarMoving = true;
-                GoingRight = true; 
+                carMoving = true;
+                goingRight = true; 
             }
         }
         else
         {
-            CarMoving = false;
-            GoingLeft = false;
-            GoingRight = false; 
+            carMoving = false;
+            goingLeft = false;
+            goingRight = false; 
         }
     }
 
     private void RotateCar()
     {
-        if(GoingLeft)
+        if(goingLeft)
         {
-            CarRotation += Time.deltaTime * 10f;    //rotation var set on pressing left side btn  
-            transform.rotation = Quaternion.Euler(0, 0, Mathf.Clamp(CarRotation,0f,7f));   //pos transformed to rotate
+            carRotation += Time.deltaTime * 10f;    //rotation var set on pressing left side btn  
+            transform.rotation = Quaternion.Euler(0, 0, Mathf.Clamp(carRotation,0f,7f));   //pos transformed to rotate
         }
         else
         {
-            CarRotation -= Time.deltaTime * 10f;
-            transform.rotation = Quaternion.Euler(0, 0, Mathf.Clamp(CarRotation,-7f,0f));   //pos transformed to rotate
+            carRotation -= Time.deltaTime * 10f;
+            transform.rotation = Quaternion.Euler(0, 0, Mathf.Clamp(carRotation,-7f,0f));   //pos transformed to rotate
         }
     }
 
     private void ResetCarRotation()
     {
-        CarRotation = 0f;
-        transform.rotation = Quaternion.Euler(0, 0, CarRotation);
+        carRotation = 0f;
+        transform.rotation = Quaternion.Euler(0, 0, carRotation);
     }
 }

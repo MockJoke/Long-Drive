@@ -772,7 +772,7 @@ GameObject:
   - component: {fileID: 522233054}
   - component: {fileID: 522233053}
   m_Layer: 5
-  m_Name: Retry
+  m_Name: RetryBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1709,16 +1709,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MainCar: {fileID: 1017272621}
-  can: {fileID: 1368040393}
-  RetryObj: {fileID: 54726068}
+  GameplayCanvas: {fileID: 1368040393}
+  RetryCanvas: {fileID: 54726068}
+  LeftTurnBtn: {fileID: 1590778}
+  RightTurnBtn: {fileID: 79326655}
   MaxHealth: 10
-  LeftBtn: {fileID: 1590778}
-  RightBtn: {fileID: 79326655}
-  controls: 0
-  CurrentCar: 0
-  sounds: {fileID: 1017272624}
-  CarCrash: {fileID: 8300000, guid: 8d782fd9acd0179469d1f52db8eda553, type: 3}
-  ReFuel: {fileID: 8300000, guid: e7c8c248968f37e468921ad81e1c3b6b, type: 3}
+  healthBar: {fileID: 1298703950}
+  ScoreBoard: {fileID: 1882608179}
+  MoneyReceived: {fileID: 1243484517}
+  CarImage: {fileID: 1017272619}
   PlayerCars:
   - {fileID: 21300000, guid: 5ab9baa7ce84d7841a4535a7287d5839, type: 3}
   - {fileID: 21300000, guid: d4eb23c7d0cf75248adb680577346c69, type: 3}
@@ -1730,10 +1729,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 53ad47ba880c4b344a3c96f675b34df1, type: 3}
   - {fileID: 21300000, guid: ebc351e63905def439622e6b5b22a3cc, type: 3}
   - {fileID: 21300000, guid: c0769e0efd798b24ca68def52f39de2b, type: 3}
-  ScoreBoard: {fileID: 0}
-  MoneyReceived: {fileID: 0}
-  healthBar: {fileID: 1298703950}
-  CarImage: {fileID: 1017272619}
+  audioSource: {fileID: 1017272624}
+  CarCrash: {fileID: 8300000, guid: 8d782fd9acd0179469d1f52db8eda553, type: 3}
+  ReFuel: {fileID: 8300000, guid: e7c8c248968f37e468921ad81e1c3b6b, type: 3}
 --- !u!61 &1017272623
 BoxCollider2D:
   m_ObjectHideFlags: 0
