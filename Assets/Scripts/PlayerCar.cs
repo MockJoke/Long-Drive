@@ -31,17 +31,8 @@ public class PlayerCar : MonoBehaviour
     [SerializeField] private SpriteRenderer CarImage; 
     [SerializeField] private Sprite[] PlayerCars;
 
-    [Header("Audio")]
-    [SerializeField] private AudioSource audioSource;
-    [SerializeField] private AudioClip CarCrash, ReFuel;
-    
-    //public AudioSource Audio; 
-    //public AudioClip CollisionSound, 
-
     void Start()
     {
-        if (audioSource == null)
-            audioSource = GetComponent<AudioSource>();
         
         if (MainCar == null)
             MainCar = GetComponent<Rigidbody2D>();
@@ -177,8 +168,8 @@ public class PlayerCar : MonoBehaviour
             PlayerPrefs.SetInt("score", score); 
             currHealth -= 2;
             healthBar.SetHealth(currHealth);
-            audioSource.clip = CarCrash;
-            audioSource.Play(); 
+            
+            AudioManager.instance.Play(EAudioClips.crash);
 
             if(currHealth != 0)
             {
@@ -206,8 +197,7 @@ public class PlayerCar : MonoBehaviour
                 healthBar.SetHealth(currHealth);
             }
 
-            audioSource.clip = ReFuel;
-            audioSource.Play(); 
+            AudioManager.instance.Play(EAudioClips.collectFuel);
 
             Destroy(collision.gameObject);
         }
