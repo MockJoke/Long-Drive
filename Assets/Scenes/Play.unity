@@ -661,7 +661,7 @@ Transform:
   m_GameObject: {fileID: 452485096}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 7.5, z: -3.5607784}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -841,7 +841,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 522233054}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1017272622}
+        m_TargetAssemblyTypeName: PlayerCar, Assembly-CSharp
+        m_MethodName: RetryBtn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &522233054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -999,7 +1011,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcda152bb35862a4494e45e9ad1a0f1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Roads: {fileID: 651749220}
+  road: {fileID: 651749220}
+  speed: 0.75
 --- !u!1 &667700314
 GameObject:
   m_ObjectHideFlags: 0
@@ -1293,8 +1306,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 982278373}
-        m_TargetAssemblyTypeName: 
+      - m_Target: {fileID: 1017272622}
+        m_TargetAssemblyTypeName: PlayerCar, Assembly-CSharp
         m_MethodName: AccelerateCar
         m_Mode: 1
         m_Arguments:
@@ -1461,7 +1474,7 @@ GameObject:
   - component: {fileID: 982278374}
   - component: {fileID: 982278373}
   m_Layer: 0
-  m_Name: GenerateObj
+  m_Name: ObjectSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1479,18 +1492,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 989914e73287b914baa6c4c38a21eb49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GenerateObj:
-  - {fileID: 7502165195071285113, guid: f306ec2b25d795347ae1144cae9b98b0, type: 3}
-  - {fileID: 6256815454102178969, guid: 210d960776226564c82bde584b421a8f, type: 3}
-  - {fileID: 5415948827438961249, guid: 165a873b93a3020469af8d8e2d6b77de, type: 3}
-  - {fileID: 4394145476106242800, guid: f828aedc19991c04195aa555f167c306, type: 3}
-  - {fileID: 3277265059994960533, guid: 7e179b4c20235d0499e2127a39b7bd76, type: 3}
-  - {fileID: 8537007935552633692, guid: 9341c4a5b3c4dda4c9b71384eb4ff375, type: 3}
-  - {fileID: 4335841145147662839, guid: 41f301a28e516ae44a09cce225425226, type: 3}
-  - {fileID: 7778665881871391432, guid: e245a96ecd42f74479744001abe3b37c, type: 3}
-  - {fileID: 1743968404066722652, guid: 183bd7ac3d3e12049b0821d20972838d, type: 3}
-  Obstacles: {fileID: 452485096}
-  speed: 0.01
+  objPool:
+  - {fileID: 4394145476106242812, guid: f828aedc19991c04195aa555f167c306, type: 3}
+  - {fileID: 2100859338108648485, guid: e245a96ecd42f74479744001abe3b37c, type: 3}
+  - {fileID: 8067890397231825940, guid: f306ec2b25d795347ae1144cae9b98b0, type: 3}
+  - {fileID: 8099924070848697364, guid: 183bd7ac3d3e12049b0821d20972838d, type: 3}
+  - {fileID: 3277265059994960529, guid: 7e179b4c20235d0499e2127a39b7bd76, type: 3}
+  - {fileID: 5415948827438961253, guid: 165a873b93a3020469af8d8e2d6b77de, type: 3}
+  - {fileID: 4335841145147662835, guid: 41f301a28e516ae44a09cce225425226, type: 3}
+  - {fileID: 2277851919692094758, guid: 210d960776226564c82bde584b421a8f, type: 3}
+  - {fileID: 8537007935552633688, guid: 9341c4a5b3c4dda4c9b71384eb4ff375, type: 3}
+  delayTimer: 5
 --- !u!4 &982278374
 Transform:
   m_ObjectHideFlags: 0
@@ -1592,9 +1604,8 @@ GameObject:
   - component: {fileID: 1017272620}
   - component: {fileID: 1017272619}
   - component: {fileID: 1017272621}
-  - component: {fileID: 1017272622}
   - component: {fileID: 1017272623}
-  - component: {fileID: 1017272624}
+  - component: {fileID: 1017272622}
   m_Layer: 0
   m_Name: PlayerCar
   m_TagString: Untagged
@@ -1683,7 +1694,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -1708,16 +1719,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcd62bcdf49a413488860156fce01ce6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MainCar: {fileID: 1017272621}
+  rb: {fileID: 1017272621}
   GameplayCanvas: {fileID: 1368040393}
   RetryCanvas: {fileID: 54726068}
   LeftTurnBtn: {fileID: 1590778}
   RightTurnBtn: {fileID: 79326655}
+  currSpeed: 0.75
+  minSpeed: 0.5
+  maxSpeed: 1.25
+  maxRotationAngle: 15
+  rotationSpeed: 30
   MaxHealth: 10
   healthBar: {fileID: 1298703950}
   ScoreBoard: {fileID: 1882608179}
   MoneyReceived: {fileID: 1243484517}
-  CarImage: {fileID: 1017272619}
+  PlayerCarImage: {fileID: 1017272619}
   PlayerCars:
   - {fileID: 21300000, guid: 5ab9baa7ce84d7841a4535a7287d5839, type: 3}
   - {fileID: 21300000, guid: d4eb23c7d0cf75248adb680577346c69, type: 3}
@@ -1729,9 +1745,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 53ad47ba880c4b344a3c96f675b34df1, type: 3}
   - {fileID: 21300000, guid: ebc351e63905def439622e6b5b22a3cc, type: 3}
   - {fileID: 21300000, guid: c0769e0efd798b24ca68def52f39de2b, type: 3}
-  audioSource: {fileID: 1017272624}
-  CarCrash: {fileID: 8300000, guid: 8d782fd9acd0179469d1f52db8eda553, type: 3}
-  ReFuel: {fileID: 8300000, guid: e7c8c248968f37e468921ad81e1c3b6b, type: 3}
+  objSpawner: {fileID: 982278373}
+  road: {fileID: 651749223}
 --- !u!61 &1017272623
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1777,102 +1792,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.0512958, y: 9.862431}
   m_EdgeRadius: 0
---- !u!82 &1017272624
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1017272618}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!1 &1049181243
 GameObject:
   m_ObjectHideFlags: 0
@@ -1884,8 +1803,9 @@ GameObject:
   - component: {fileID: 1049181244}
   - component: {fileID: 1049181245}
   - component: {fileID: 1049181246}
+  - component: {fileID: 1049181247}
   m_Layer: 0
-  m_Name: DownBarrier
+  m_Name: ObjDestroyer
   m_TagString: DownBarrier
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1900,7 +1820,7 @@ Transform:
   m_GameObject: {fileID: 1049181243}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -5.5, z: 0}
+  m_LocalPosition: {x: 0, y: -10, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1959,7 +1879,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1049181243}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -1978,6 +1898,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
+--- !u!114 &1049181247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1049181243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51f16a11ef1654045a8fee1241aec413, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1243484515
 GameObject:
   m_ObjectHideFlags: 0
@@ -3002,8 +2934,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 982278373}
-        m_TargetAssemblyTypeName: 
+      - m_Target: {fileID: 1017272622}
+        m_TargetAssemblyTypeName: PlayerCar, Assembly-CSharp
         m_MethodName: DecelerateCar
         m_Mode: 1
         m_Arguments:

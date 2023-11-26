@@ -4,11 +4,11 @@ using UnityEngine.SceneManagement;
 
 public class PlayerCar : MonoBehaviour
 {
-    [SerializeField] private Rigidbody2D MainCar;
+    [SerializeField] private Rigidbody2D rb;
     [SerializeField] private GameObject GameplayCanvas; 
     [SerializeField] private GameObject RetryCanvas;
 
-    [Header("Controls")] 
+    [Header("Controls")]
     [SerializeField] private GameObject LeftTurnBtn; 
     [SerializeField] private GameObject RightTurnBtn;
     private int currControls = 0; 
@@ -17,6 +17,12 @@ public class PlayerCar : MonoBehaviour
     private bool goingRight = false; 
     private bool carMoving = false;
     
+    [Header("Movement")]
+    [SerializeField] private float currSpeed = 0.75f;
+    [SerializeField] private float minSpeed = 0.5f;
+    [SerializeField] private float maxSpeed = 1.25f;
+    [SerializeField] private float maxRotationAngle = 7f;
+    [SerializeField] private float rotationSpeed = 10f;
     private float carRotation = 0f;
     
     [Header("Info UI")]
@@ -25,20 +31,29 @@ public class PlayerCar : MonoBehaviour
     [SerializeField] private TextMeshProUGUI ScoreBoard; 
     [SerializeField] private TextMeshProUGUI MoneyReceived; 
     private int currHealth;
-    private int score, money, accountBalance, speed; 
+    private int score, money, accountBalance;
     private float GameTime;
     
-    [SerializeField] private SpriteRenderer CarImage; 
+    [SerializeField] private SpriteRenderer PlayerCarImage; 
     [SerializeField] private Sprite[] PlayerCars;
 
+    [Header("Managers")] 
+    [SerializeField] private ObjectSpawner objSpawner;
+    [SerializeField] private Road road;
+    
     void Start()
     {
+        if (rb == null)
+            rb = GetComponent<Rigidbody2D>();
         
-        if (MainCar == null)
-            MainCar = GetComponent<Rigidbody2D>();
+        if (PlayerCarImage == null)
+            PlayerCarImage = GetComponent<SpriteRenderer>();
+
+        if (objSpawner == null)
+            objSpawner = FindObjectOfType<ObjectSpawner>();
         
-        if (CarImage == null)
-            CarImage = GetComponent<SpriteRenderer>();
+        if (road == null)
+            road = FindObjectOfType<Road>();
         
         currControls = PlayerPrefs.GetInt("controls");
 
@@ -47,12 +62,14 @@ public class PlayerCar : MonoBehaviour
 
         currCar = PlayerPrefs.GetInt("CurrentCar");
         accountBalance = PlayerPrefs.GetInt("AccountBalance", 0);
+        
+        PlayerCarImage.sprite = PlayerCars[currCar];
+        
+        objSpawner.SetSpeed(currSpeed);
     }
 
     void Update()
     {
-        CarImage.sprite = PlayerCars[currCar];
-
         switch (currControls)
         {
             case 1:
@@ -82,7 +99,7 @@ public class PlayerCar : MonoBehaviour
             GameObject[] Enemies = GameObject.FindGameObjectsWithTag("Enemy");
             foreach (GameObject enemy in Enemies)
             {
-                enemy.GetComponent<MoveObj>().speed = 0f;  //to stop already generated enemy cars by making its speed 0
+                enemy.GetComponent<ObjectMovement>().speed = 0f;  //to stop already generated enemy cars by making its speed 0
             }
 
             GameplayCanvas.GetComponent<CanvasGroup>().interactable = false;
@@ -123,43 +140,13 @@ public class PlayerCar : MonoBehaviour
 
         // print(Mathf.FloorToInt(GameTime));
     }
-
-    public void RetryBtn()
+    
+    private void OnDestroy()
     {
-        accountBalance = accountBalance + money;
-        PlayerPrefs.SetInt("AccountBalance", accountBalance);
-        RetryCanvas.SetActive(false);
-
-        GameplayCanvas.GetComponent<CanvasGroup>().interactable = true;
-        SceneManager.LoadScene("Play");
-
-        GameTime = 0;
+        healthBar.SetHealth(MaxHealth);
+        Time.timeScale = 1;
     }
-
-    public void SettingsBtn()
-    {
-        SceneManager.LoadScene("Settings");
-    }
-
-    private void LeftSide()
-    {
-        //if (Input.GetKeyUp(KeyCode.LeftArrow))
-        {
-            transform.position = new Vector2(transform.position.x - 0.01f, transform.position.y);
-        }
-            
-        //MainCar.velocity = Vector2.left;
-    }
-
-    private void RightSide()
-    {
-        //if (Input.GetKeyUp(KeyCode.LeftArrow))
-        {
-            transform.position = new Vector2(transform.position.x + 0.01f, transform.position.y);
-        }
-            
-        //MainCar.velocity = Vector2.right;
-    }
+    
     public void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
@@ -175,18 +162,11 @@ public class PlayerCar : MonoBehaviour
             {
                 Destroy(collision.gameObject); 
             }
-            
-            //Time.timeScale = 0; //to make game into pause mode 
-            //GameObject[] Enemies = GameObject.FindGameObjectsWithTag("Enemy");
-            //foreach (GameObject enemy in Enemies)
-            //{
-            //    enemy.GetComponent<MoveObj>().speed = 0f;  //to stop already generated enemy cars by making its speed 0
-            //}
         }
 
         if (collision.gameObject.CompareTag("Fuel"))
         {
-            if(currHealth<MaxHealth)
+            if(currHealth < MaxHealth)
             {
                 currHealth += 1;
                 healthBar.SetHealth(currHealth);
@@ -202,11 +182,36 @@ public class PlayerCar : MonoBehaviour
             Destroy(collision.gameObject);
         }
     }
-
-    private void OnDestroy()
+    
+    public void RetryBtn()
     {
-        healthBar.SetHealth(MaxHealth);
-        Time.timeScale = 1;
+        accountBalance = accountBalance + money;
+        PlayerPrefs.SetInt("AccountBalance", accountBalance);
+        RetryCanvas.SetActive(false);
+
+        GameplayCanvas.GetComponent<CanvasGroup>().interactable = true;
+        SceneManager.LoadScene("Play");
+
+        GameTime = 0;
+    }
+
+    public void SettingsBtn()
+    {
+        SceneManager.LoadScene("Settings", LoadSceneMode.Additive);
+    }
+
+    private void LeftSide()
+    {
+        transform.position = new Vector2(transform.position.x - 0.01f, transform.position.y);
+            
+        //MainCar.velocity = Vector2.left;
+    }
+
+    private void RightSide()
+    {
+        transform.position = new Vector2(transform.position.x + 0.01f, transform.position.y);
+            
+        //MainCar.velocity = Vector2.right;
     }
 
     public void LeftBtnDown()
@@ -309,13 +314,13 @@ public class PlayerCar : MonoBehaviour
     {
         if(goingLeft)
         {
-            carRotation += Time.deltaTime * 10f;    //rotation var set on pressing left side btn  
-            transform.rotation = Quaternion.Euler(0, 0, Mathf.Clamp(carRotation,0f,7f));   //pos transformed to rotate
+            carRotation += Time.deltaTime * rotationSpeed;    //rotation var set on pressing left side btn  
+            transform.rotation = Quaternion.Euler(0, 0, Mathf.Clamp(carRotation, 0f, maxRotationAngle));   //pos transformed to rotate
         }
         else
         {
-            carRotation -= Time.deltaTime * 10f;
-            transform.rotation = Quaternion.Euler(0, 0, Mathf.Clamp(carRotation,-7f,0f));   //pos transformed to rotate
+            carRotation -= Time.deltaTime * rotationSpeed;
+            transform.rotation = Quaternion.Euler(0, 0, Mathf.Clamp(carRotation, -maxRotationAngle, 0f));   //pos transformed to rotate
         }
     }
 
@@ -323,5 +328,23 @@ public class PlayerCar : MonoBehaviour
     {
         carRotation = 0f;
         transform.rotation = Quaternion.Euler(0, 0, carRotation);
+    }
+    
+    public void AccelerateCar()
+    {
+        currSpeed += 0.01f;
+        currSpeed = Mathf.Clamp(currSpeed, minSpeed, maxSpeed);
+        
+        objSpawner.SetSpeed(currSpeed);
+        road.SetSpeed(currSpeed);
+    }
+
+    public void DecelerateCar()
+    {
+        currSpeed -= 0.01f;
+        currSpeed = Mathf.Clamp(currSpeed, minSpeed, maxSpeed);
+
+        objSpawner.SetSpeed(currSpeed);
+        road.SetSpeed(currSpeed);
     }
 }
