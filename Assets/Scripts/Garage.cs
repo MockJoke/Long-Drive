@@ -8,29 +8,27 @@ public class Garage : MonoBehaviour
     [SerializeField] private SpriteRenderer PlayerCar;
     [SerializeField] private Sprite[] CarSprites;
     [SerializeField] private TextMeshProUGUI Money;
-    private int AccountBalance = 0;
-    private int CurrentCar = 0;
+    private int accountBalance = 0;
+    private int currCar = 0;
 
     void Start()
     {
-        AccountBalance = PlayerPrefs.GetInt("AccountBalance");
-        Money.text = "AccountBalance: Rs " + AccountBalance; 
+        accountBalance = PlayerPrefs.GetInt("AccountBalance");
+        Money.text = "AccountBalance: Rs " + accountBalance; 
         
-        ShowCar(CurrentCar);
+        ShowCar(currCar);
     }
 
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.RightArrow))
         {
-            ShowCar(CurrentCar + 1);
+            ShowCar(currCar + 1);
         }
         else if(Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            ShowCar(CurrentCar - 1);
+            ShowCar(currCar - 1);
         }
-
-        PlayerPrefs.SetInt("CurrentCar", CurrentCar);
     }
 
     private void ShowCar(int CarNo)
@@ -38,29 +36,31 @@ public class Garage : MonoBehaviour
         if(CarNo >= CarSprites.Length - 1)
         {
             CarNo = 0;
-            CurrentCar = CarNo;
+            currCar = CarNo;
         }
         else if(CarNo < 0)
         {
             CarNo = CarSprites.Length - 1;
-            CurrentCar = CarNo;
+            currCar = CarNo;
         }
         else
         {
-            CurrentCar = CarNo;
+            currCar = CarNo;
         }
 
-        PlayerCar.sprite = CarSprites[CurrentCar];
+        PlayerCar.sprite = CarSprites[currCar];
+        
+        PlayerPrefs.SetInt("CurrentCar", currCar);
     }
 
     public void ShowNext()
     {
-        ShowCar(CurrentCar + 1);
+        ShowCar(currCar + 1);
     }
 
     public void ShowPrevious()
     {
-        ShowCar(CurrentCar - 1);
+        ShowCar(currCar - 1);
     }
 
     public void PlayBtn()
