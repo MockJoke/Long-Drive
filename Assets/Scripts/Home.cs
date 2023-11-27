@@ -1,9 +1,19 @@
-﻿using UnityEditor;
+﻿using System;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Home : MonoBehaviour
 {
+    [SerializeField] private GameObject homeCanvasObj;
+    [SerializeField] private SettingsManager settingsManager;
+
+    void Awake()
+    {
+        if (settingsManager == null)
+            settingsManager = FindObjectOfType<SettingsManager>();
+    }
+
     public void PlayBtn()
     {
         SceneManager.LoadScene("Play");
@@ -16,7 +26,15 @@ public class Home : MonoBehaviour
 
     public void SettingsBtn()
     {
-        SceneManager.LoadScene("Settings");
+        homeCanvasObj.SetActive(false);
+        settingsManager.OpenMenu();
+        settingsManager.OnClose += OpenHomeCanvas;
+    }
+
+    private void OpenHomeCanvas()
+    {
+        homeCanvasObj.SetActive(true);
+        settingsManager.ResetCloseAction();
     }
 
     public void QuitBtn()
