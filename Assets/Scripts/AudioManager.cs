@@ -14,6 +14,8 @@ public class AudioManager : MonoBehaviour
     public Sound[] sounds;
     
     public static AudioManager instance { get; private set; }
+
+    public bool isMuted = false;
     
     void Awake()
     {
@@ -68,5 +70,10 @@ public class AudioManager : MonoBehaviour
         }
         
         s.source.Stop();
+    }
+
+    public void ToggleMusic()
+    {
+        isMuted = !isMuted;
     }
 }
