@@ -5,16 +5,14 @@ using UnityEngine.SceneManagement;
 public class PlayerCar : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private GameObject GameplayCanvas; 
-    [SerializeField] private GameObject RetryCanvas;
 
     [Header("Controls")]
-    [SerializeField] private GameObject LeftTurnBtn; 
+    [SerializeField] private GameObject LeftTurnBtn;
     [SerializeField] private GameObject RightTurnBtn;
-    private int currControls = 0; 
+    private int currControls = 0;
     private int currCar = 0;
     private bool goingLeft = false;
-    private bool goingRight = false; 
+    private bool goingRight = false;
     private bool carMoving = false;
     
     [Header("Movement")]
@@ -28,8 +26,6 @@ public class PlayerCar : MonoBehaviour
     [Header("Info UI")]
     [SerializeField] private int MaxHealth = 10;
     [SerializeField] private HealthBar healthBar;
-    [SerializeField] private TextMeshProUGUI ScoreBoard; 
-    [SerializeField] private TextMeshProUGUI MoneyReceived; 
     private int currHealth;
     private int score, money, accountBalance;
     private float GameTime;
@@ -38,6 +34,7 @@ public class PlayerCar : MonoBehaviour
     [SerializeField] private Sprite[] PlayerCars;
 
     [Header("Managers")] 
+    [SerializeField] private GameplayUI gameplayUI;
     [SerializeField] private ObjectSpawner objSpawner;
     [SerializeField] private Road road;
     
@@ -86,7 +83,7 @@ public class PlayerCar : MonoBehaviour
                 LeftTurnBtn.SetActive(false);
                 RightTurnBtn.SetActive(false);
                 break;
-            default:
+            case 4:
                 MoveOnSensor(); 
                 LeftTurnBtn.SetActive(false);
                 RightTurnBtn.SetActive(false);
@@ -95,21 +92,15 @@ public class PlayerCar : MonoBehaviour
 
         if (currHealth == 0)
         {
-            Time.timeScale = 0; //to make game into pause mode 
-            GameObject[] Enemies = GameObject.FindGameObjectsWithTag("Enemy");
-            foreach (GameObject enemy in Enemies)
-            {
-                enemy.GetComponent<ObjectMovement>().speed = 0f;  //to stop already generated enemy cars by making its speed 0
-            }
+            Time.timeScale = 0;     //to make game into pause mode
 
-            GameplayCanvas.GetComponent<CanvasGroup>().interactable = false;
+            gameplayUI.ToggleGameplayCanvas(false);
+            gameplayUI.ToggleRetryCanvas(true);
 
-            RetryCanvas.SetActive(true);
-
-            ScoreBoard.text = "SCORE: " + score;
+            gameplayUI.UpdateScore(score);
 
             money = score / 5;
-            MoneyReceived.text = "Money: Rs" + money;
+            gameplayUI.UpdateMoney(money);
         }
 
         if(goingLeft)
@@ -187,17 +178,13 @@ public class PlayerCar : MonoBehaviour
     {
         accountBalance = accountBalance + money;
         PlayerPrefs.SetInt("AccountBalance", accountBalance);
-        RetryCanvas.SetActive(false);
-
-        GameplayCanvas.GetComponent<CanvasGroup>().interactable = true;
+        
+        gameplayUI.ToggleRetryCanvas(true);
+        gameplayUI.ToggleGameplayCanvas(false);
+        
         SceneManager.LoadScene("Play");
 
         GameTime = 0;
-    }
-
-    public void SettingsBtn()
-    {
-        SceneManager.LoadScene("Settings", LoadSceneMode.Additive);
     }
 
     private void LeftSide()
