@@ -31,16 +31,6 @@ public class SettingsManager : MonoBehaviour
         PlayerPrefs.SetInt("controls", controls);
     }
 
-    public void PlayBtn()
-    {
-        SceneManager.LoadScene("Play");
-    }
-
-    public void HomeBtn()
-    {
-        SceneManager.LoadScene("Home");
-    }
-
     public void CloseMenu()
     {
         gameObject.SetActive(false);
@@ -60,5 +50,15 @@ public class SettingsManager : MonoBehaviour
     public void MusicBtn()
     {
         AudioManager.instance.ToggleMusic();
+    }
+    
+    public void PlayBtn()
+    {
+        SceneManager.LoadScene("Play");
+    }
+
+    public void HomeBtn()
+    {
+        SceneManager.LoadScene("Home");
     }
 }

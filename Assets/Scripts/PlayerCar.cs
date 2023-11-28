@@ -1,5 +1,4 @@
-﻿using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PlayerCar : MonoBehaviour
@@ -27,8 +26,10 @@ public class PlayerCar : MonoBehaviour
     [SerializeField] private int MaxHealth = 10;
     [SerializeField] private HealthBar healthBar;
     private int currHealth;
-    private int score, money, accountBalance;
-    private float GameTime;
+    private int score;
+    private int money;
+    private int accountBalance;
+    private float gameTime;
     
     [SerializeField] private SpriteRenderer PlayerCarImage; 
     [SerializeField] private Sprite[] PlayerCars;
@@ -37,8 +38,8 @@ public class PlayerCar : MonoBehaviour
     [SerializeField] private GameplayUI gameplayUI;
     [SerializeField] private ObjectSpawner objSpawner;
     [SerializeField] private Road road;
-    
-    void Start()
+
+    void Awake()
     {
         if (rb == null)
             rb = GetComponent<Rigidbody2D>();
@@ -51,7 +52,10 @@ public class PlayerCar : MonoBehaviour
         
         if (road == null)
             road = FindObjectOfType<Road>();
-        
+    }
+
+    void Start()
+    {
         currControls = PlayerPrefs.GetInt("controls");
 
         currHealth = MaxHealth;
@@ -122,17 +126,11 @@ public class PlayerCar : MonoBehaviour
             ResetCarRotation(); 
         }
 
-        GameTime += Time.deltaTime;
-        // GameTime = (int)Time.time; 
-        score = (int)GameTime;
-        
-        // AccountBalance += money;
-        // PlayerPrefs.SetInt("AccountBalance", AccountBalance);
-
-        // print(Mathf.FloorToInt(GameTime));
+        gameTime += Time.deltaTime;
+        score = (int)gameTime;
     }
     
-    private void OnDestroy()
+    void OnDestroy()
     {
         healthBar.SetHealth(MaxHealth);
         Time.timeScale = 1;
@@ -176,7 +174,7 @@ public class PlayerCar : MonoBehaviour
     
     public void RetryBtn()
     {
-        accountBalance = accountBalance + money;
+        accountBalance += money;
         PlayerPrefs.SetInt("AccountBalance", accountBalance);
         
         gameplayUI.ToggleRetryCanvas(true);
@@ -184,7 +182,7 @@ public class PlayerCar : MonoBehaviour
         
         SceneManager.LoadScene("Play");
 
-        GameTime = 0;
+        gameTime = 0;
     }
 
     private void LeftSide()

@@ -28,8 +28,8 @@ public class ObjectSpawner : MonoBehaviour
     private void GenerateObj()
     {
         int i = Random.Range(0, objPool.Length);
-        Vector2 pos = new Vector2(Random.Range(-2.2f, 2.2f), transform.position.y);   //set pos of generation of the car 
-        Instantiate(objPool[i].gameObject, pos, Quaternion.identity, transform);    //instantiate the car on parent pos
+        Vector2 pos = new Vector2(Random.Range(-2.2f, 2.2f), transform.position.y);     //set pos of generation of the car 
+        Instantiate(objPool[i].gameObject, pos, Quaternion.identity, transform);        //instantiate the car on parent pos
     }
 
     public void SetSpeed(float s)
