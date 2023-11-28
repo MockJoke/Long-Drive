@@ -94,7 +94,7 @@ public class PlayerCar : MonoBehaviour
                 break;
         }
 
-        if (currHealth == 0)
+        if (currHealth <= 0)
         {
             Time.timeScale = 0;     //to make game into pause mode
 

@@ -5,11 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class GameplayUI : MonoBehaviour
 {
+    [Header("Screens")]
     [SerializeField] private Canvas GameplayCanvas;
     [SerializeField] private Canvas RetryCanvas;
     [SerializeField] private Canvas PauseCanvas;
     [SerializeField] private SettingsManager settingsManager;
     
+    [Header("Fields")]
     [SerializeField] private TextMeshProUGUI ScoreBoard; 
     [SerializeField] private TextMeshProUGUI MoneyReceived;
 

@@ -2006,7 +2006,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 53ad47ba880c4b344a3c96f675b34df1, type: 3}
   - {fileID: 21300000, guid: ebc351e63905def439622e6b5b22a3cc, type: 3}
   - {fileID: 21300000, guid: c0769e0efd798b24ca68def52f39de2b, type: 3}
-  gameplayUI: {fileID: 0}
+  gameplayUI: {fileID: 1680026151}
   objSpawner: {fileID: 982278373}
   road: {fileID: 651749223}
 --- !u!61 &1017272623
