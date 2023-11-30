@@ -14,7 +14,7 @@ public class Garage : MonoBehaviour
     void Start()
     {
         accountBalance = PlayerPrefs.GetInt("AccountBalance");
-        Money.text = "AccountBalance: Rs " + accountBalance; 
+        Money.text = $"{accountBalance}"; 
         
         ShowCar(currCar);
     }
