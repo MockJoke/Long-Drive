@@ -67,33 +67,14 @@ public class PlayerCar : MonoBehaviour
         PlayerCarImage.sprite = PlayerCars[currCar];
         
         objSpawner.SetSpeed(currSpeed);
+        
+        UpdateControls();
     }
 
     void Update()
     {
-        switch (currControls)
-        {
-            case 1:
-                LeftTurnBtn.SetActive(true);
-                RightTurnBtn.SetActive(true);
-                break;
-            case 2:
-                MoveOnKeys(); 
-                LeftTurnBtn.SetActive(false);
-                RightTurnBtn.SetActive(false);
-                break;
-            case 3:
-                MoveOnTouch();
-                LeftTurnBtn.SetActive(false);
-                RightTurnBtn.SetActive(false);
-                break;
-            case 4:
-                MoveOnSensor(); 
-                LeftTurnBtn.SetActive(false);
-                RightTurnBtn.SetActive(false);
-                break;
-        }
-
+        DetectInput();
+        
         if (currHealth <= 0)
         {
             Time.timeScale = 0;     //to make game into pause mode
@@ -134,6 +115,36 @@ public class PlayerCar : MonoBehaviour
     {
         healthBar.SetHealth(MaxHealth);
         Time.timeScale = 1;
+    }
+
+    private void UpdateControls()
+    {
+        if (currControls == 1)
+        {
+            LeftTurnBtn.SetActive(true);
+            RightTurnBtn.SetActive(true);
+        }
+        else
+        {
+            LeftTurnBtn.SetActive(false);
+            RightTurnBtn.SetActive(false);
+        }
+    }
+
+    private void DetectInput()
+    {
+        switch (currControls)
+        {
+            case 2:
+                MoveOnKeys();
+                break;
+            case 3:
+                MoveOnTouch();
+                break;
+            case 4:
+                MoveOnSensor();
+                break;
+        }
     }
     
     public void OnCollisionEnter2D(Collision2D collision)
@@ -225,13 +236,13 @@ public class PlayerCar : MonoBehaviour
 
     private void MoveOnKeys()
     {
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
         {
             LeftSide();
             carMoving = true;
             goingLeft = true;
         }
-        else if (Input.GetKey(KeyCode.RightArrow))
+        else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
         {
             RightSide();
             carMoving = true;
@@ -242,6 +253,15 @@ public class PlayerCar : MonoBehaviour
             carMoving = false;
             goingLeft = false;
             goingRight = false;
+        }
+
+        if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
+        {
+            AccelerateCar();
+        }
+        else if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
+        {
+            DecelerateCar();
         }
     }
 
