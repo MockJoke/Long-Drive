@@ -28,7 +28,7 @@ public class GameplayUI : MonoBehaviour
 
     public void UpdateMoney(int value)
     {
-        MoneyReceived.text = "Money: Rs" + value;
+        MoneyReceived.text = "MONEY: " + value;
     }
 
     public void ToggleRetryCanvas(bool b)
