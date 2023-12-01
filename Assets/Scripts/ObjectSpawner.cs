@@ -5,6 +5,8 @@ public class ObjectSpawner : MonoBehaviour
 {
     [SerializeField] private ObjectMovement[] objPool = new ObjectMovement[9];
     [SerializeField] private float delayTimer = 5f;
+    [SerializeField] private float leftBoundary = -2.2f;
+    [SerializeField] private float rightBoundary = 2.2f;
     private float timer = 0f;
     
     void Start()
@@ -28,7 +30,7 @@ public class ObjectSpawner : MonoBehaviour
     private void GenerateObj()
     {
         int i = Random.Range(0, objPool.Length);
-        Vector2 pos = new Vector2(Random.Range(-2.2f, 2.2f), transform.position.y);     //set pos of generation of the car 
+        Vector2 pos = new Vector2(Random.Range(leftBoundary, rightBoundary), transform.position.y);     //set pos of generation of the car 
         Instantiate(objPool[i].gameObject, pos, Quaternion.identity, transform);        //instantiate the car on parent pos
     }
 

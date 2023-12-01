@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PlayerCar : MonoBehaviour
@@ -132,10 +133,10 @@ public class PlayerCar : MonoBehaviour
                 break;
         }
     }
-    
-    public void OnCollisionEnter2D(Collision2D collision)
+
+    void OnTriggerEnter2D(Collider2D other)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (other.gameObject.CompareTag("Enemy"))
         {
             score--;
             PlayerPrefs.SetInt("score", score); 
@@ -146,11 +147,11 @@ public class PlayerCar : MonoBehaviour
 
             if(currHealth != 0)
             {
-                Destroy(collision.gameObject); 
+                Destroy(other.gameObject); 
             }
         }
 
-        if (collision.gameObject.CompareTag("Fuel"))
+        if (other.gameObject.CompareTag("Fuel"))
         {
             if(currHealth < MaxHealth)
             {
@@ -165,9 +166,45 @@ public class PlayerCar : MonoBehaviour
 
             AudioManager.instance.Play(EAudioClips.collectFuel);
 
-            Destroy(collision.gameObject);
+            Destroy(other.gameObject);
         }
     }
+
+    // public void OnCollisionEnter2D(Collision2D collision)
+    // {
+    //     if (collision.gameObject.CompareTag("Enemy"))
+    //     {
+    //         score--;
+    //         PlayerPrefs.SetInt("score", score); 
+    //         currHealth -= 2;
+    //         healthBar.SetHealth(currHealth);
+    //         
+    //         AudioManager.instance.Play(EAudioClips.crash);
+    //
+    //         if(currHealth != 0)
+    //         {
+    //             Destroy(collision.gameObject); 
+    //         }
+    //     }
+    //
+    //     if (collision.gameObject.CompareTag("Fuel"))
+    //     {
+    //         if(currHealth < MaxHealth)
+    //         {
+    //             currHealth += 1;
+    //             healthBar.SetHealth(currHealth);
+    //         }
+    //         else
+    //         {
+    //             currHealth = MaxHealth;
+    //             healthBar.SetHealth(currHealth);
+    //         }
+    //
+    //         AudioManager.instance.Play(EAudioClips.collectFuel);
+    //
+    //         Destroy(collision.gameObject);
+    //     }
+    // }
     
     public void RetryBtn()
     {
