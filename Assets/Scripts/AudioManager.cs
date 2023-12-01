@@ -44,6 +44,8 @@ public class AudioManager : MonoBehaviour
     void Start()
     {
         Play(EAudioClips.astronautBgMusic);
+
+        SetMusicListener();
     }
 
     public void Play(EAudioClips audioName)
@@ -72,8 +74,16 @@ public class AudioManager : MonoBehaviour
         s.source.Stop();
     }
 
+    private void SetMusicListener()
+    {
+        isMuted = PlayerPrefs.GetInt("Muted") == 1;
+        AudioListener.pause = isMuted;
+    }
+    
     public void ToggleMusic()
     {
         isMuted = !isMuted;
+        AudioListener.pause = isMuted;
+        PlayerPrefs.SetInt("Muted", isMuted ? 1 : 0);
     }
 }

@@ -1,11 +1,18 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SettingsManager : MonoBehaviour
 {
+    [SerializeField] private Toggle MusicToggle;
     private int controls = 1;
     public Action OnClose;
+
+    void Start()
+    {
+        SetMusicToggle();
+    }
 
     public void ButtonsBtn()
     {
@@ -45,6 +52,11 @@ public class SettingsManager : MonoBehaviour
     public void ResetCloseAction()
     {
         OnClose = null;
+    }
+
+    private void SetMusicToggle()
+    {
+        MusicToggle.isOn = PlayerPrefs.GetInt("Muted") != 1;
     }
     
     public void MusicBtn()
