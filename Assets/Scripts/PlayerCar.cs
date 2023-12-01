@@ -15,12 +15,15 @@ public class PlayerCar : MonoBehaviour
     private bool carMoving = false;
     
     [Header("Movement")]
-    [SerializeField] private float currSpeed = 0.75f;
-    [SerializeField] private float minSpeed = 0.5f;
-    [SerializeField] private float maxSpeed = 1.25f;
-    [SerializeField] private float maxRotationAngle = 7f;
-    [SerializeField] private float rotationSpeed = 10f;
-    private float carRotation = 0f;
+    [SerializeField] private float currSpeed = 4f;
+    [SerializeField] private float minSpeed = 2f;
+    [SerializeField] private float maxSpeed = 6f;
+    [SerializeField] private float maxRotationAngle = 45f;
+    [SerializeField] private float rotationSpeed = 5f;
+    [SerializeField] private float rotationResetSpeed = 10f;
+    [SerializeField] private float maxLeftBoundary = -2.2f;
+    [SerializeField] private float maxRightBoundary = 2.2f;
+    // private float carRotation = 0f;
     
     [Header("Info UI")]
     [SerializeField] private int MaxHealth = 10;
@@ -88,24 +91,7 @@ public class PlayerCar : MonoBehaviour
             gameplayUI.UpdateMoney(money);
         }
 
-        if(goingLeft)
-        {
-            LeftSide();
-        }
-
-        if(goingRight)
-        {
-            RightSide(); 
-        }
-
-        if(carMoving)
-        {
-            RotateCar();
-        }
-        else
-        {
-            ResetCarRotation(); 
-        }
+        Move();
 
         gameTime += Time.deltaTime;
         score = (int)gameTime;
@@ -196,17 +182,55 @@ public class PlayerCar : MonoBehaviour
         gameTime = 0;
     }
 
+    private void Move()
+    {
+        if(goingLeft)
+        {
+            LeftSide();
+        }
+        else if(goingRight)
+        {
+            RightSide(); 
+        }
+
+        // if (transform.position.x < maxLeftBoundary)
+        // {
+        //     transform.position = new Vector3(maxLeftBoundary, transform.position.y, transform.position.z);
+        // }
+        // if (transform.position.x > maxRightBoundary)
+        // {
+        //     transform.position = new Vector3(maxRightBoundary, transform.position.y, transform.position.z);
+        // }
+        
+        Vector3 pos = transform.position;
+        pos.x = Mathf.Clamp(pos.x, maxLeftBoundary, maxRightBoundary);
+        transform.position = pos;
+        
+        if(carMoving)
+        {
+            RotateCar();
+        }
+        else
+        {
+            ResetCarRotation(); 
+        }
+    }
+    
     private void LeftSide()
     {
-        transform.position = new Vector2(transform.position.x - 0.01f, transform.position.y);
-            
+        transform.position -= new Vector3(currSpeed * Time.deltaTime, 0, 0);
+        // transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, -maxRotationAngle), rotationSpeed * Time.deltaTime);
+        
+        // transform.position = new Vector3(transform.position.x - 0.01f, transform.position.y, 0);
         //MainCar.velocity = Vector2.left;
     }
 
     private void RightSide()
     {
-        transform.position = new Vector2(transform.position.x + 0.01f, transform.position.y);
-            
+        transform.position += new Vector3(currSpeed * Time.deltaTime, 0, 0);
+        // transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, maxRotationAngle), rotationSpeed * Time.deltaTime);
+        
+        // transform.position = new Vector3(transform.position.x + 0.01f, transform.position.y, 0);
         //MainCar.velocity = Vector2.right;
     }
 
@@ -238,13 +262,11 @@ public class PlayerCar : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
         {
-            LeftSide();
             carMoving = true;
             goingLeft = true;
         }
         else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
         {
-            RightSide();
             carMoving = true;
             goingRight = true;
         }
@@ -269,13 +291,11 @@ public class PlayerCar : MonoBehaviour
     {
         if(Input.acceleration.x < -0.1f)
         {
-            LeftSide();
             carMoving = true;
             goingLeft = true;
         }
         else if(Input.acceleration.x > 0.1f)
         {
-            RightSide();
             carMoving = true;
             goingRight = true;
         }
@@ -296,13 +316,11 @@ public class PlayerCar : MonoBehaviour
             
             if(pos.x < divider)
             {
-                LeftSide();
                 carMoving = true;
                 goingLeft = true; 
             }
             else
             {
-                RightSide();
                 carMoving = true;
                 goingRight = true; 
             }
@@ -319,20 +337,26 @@ public class PlayerCar : MonoBehaviour
     {
         if(goingLeft)
         {
-            carRotation += Time.deltaTime * rotationSpeed;    //rotation var set on pressing left side btn  
-            transform.rotation = Quaternion.Euler(0, 0, Mathf.Clamp(carRotation, 0f, maxRotationAngle));   //pos transformed to rotate
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, maxRotationAngle), rotationSpeed * Time.deltaTime);
+            
+            // carRotation += Time.deltaTime * rotationSpeed;    //rotation var set on pressing left side btn  
+            // transform.rotation = Quaternion.Euler(0, 0, Mathf.Clamp(carRotation, 0f, maxRotationAngle));   //pos transformed to rotate
         }
         else
         {
-            carRotation -= Time.deltaTime * rotationSpeed;
-            transform.rotation = Quaternion.Euler(0, 0, Mathf.Clamp(carRotation, -maxRotationAngle, 0f));   //pos transformed to rotate
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, -maxRotationAngle), rotationSpeed * Time.deltaTime);
+            
+            // carRotation -= Time.deltaTime * rotationSpeed;
+            // transform.rotation = Quaternion.Euler(0, 0, Mathf.Clamp(carRotation, -maxRotationAngle, 0f));   //pos transformed to rotate
         }
     }
 
     private void ResetCarRotation()
     {
-        carRotation = 0f;
-        transform.rotation = Quaternion.Euler(0, 0, carRotation);
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, 0), rotationResetSpeed * Time.deltaTime);
+        
+        // carRotation = 0f;
+        // transform.rotation = Quaternion.Euler(0, 0, carRotation);
     }
     
     public void AccelerateCar()

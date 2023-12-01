@@ -1029,7 +1029,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &667700315
 Transform:
   m_ObjectHideFlags: 0
@@ -1987,11 +1987,14 @@ MonoBehaviour:
   rb: {fileID: 1017272621}
   LeftTurnBtn: {fileID: 1590778}
   RightTurnBtn: {fileID: 79326655}
-  currSpeed: 0.75
-  minSpeed: 0.5
-  maxSpeed: 1.25
-  maxRotationAngle: 15
-  rotationSpeed: 30
+  currSpeed: 4
+  minSpeed: 2
+  maxSpeed: 6
+  maxRotationAngle: 45
+  rotationSpeed: 5
+  rotationResetSpeed: 10
+  maxLeftBoundary: -2.2
+  maxRightBoundary: 2.2
   MaxHealth: 10
   healthBar: {fileID: 1298703950}
   PlayerCarImage: {fileID: 1017272619}
@@ -3504,7 +3507,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1757414159
 Transform:
   m_ObjectHideFlags: 0
