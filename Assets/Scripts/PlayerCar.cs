@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PlayerCar : MonoBehaviour
@@ -90,6 +89,9 @@ public class PlayerCar : MonoBehaviour
 
             money = score / 5;
             gameplayUI.UpdateMoney(money);
+            
+            accountBalance += money;
+            PlayerPrefs.SetInt("AccountBalance", accountBalance);
         }
 
         Move();
@@ -172,9 +174,6 @@ public class PlayerCar : MonoBehaviour
     
     public void RetryBtn()
     {
-        accountBalance += money;
-        PlayerPrefs.SetInt("AccountBalance", accountBalance);
-        
         gameplayUI.ToggleRetryCanvas(true);
         gameplayUI.ToggleGameplayCanvas(false);
         
