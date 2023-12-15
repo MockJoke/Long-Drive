@@ -169,42 +169,6 @@ public class PlayerCar : MonoBehaviour
             Destroy(other.gameObject);
         }
     }
-
-    // public void OnCollisionEnter2D(Collision2D collision)
-    // {
-    //     if (collision.gameObject.CompareTag("Enemy"))
-    //     {
-    //         score--;
-    //         PlayerPrefs.SetInt("score", score); 
-    //         currHealth -= 2;
-    //         healthBar.SetHealth(currHealth);
-    //         
-    //         AudioManager.instance.Play(EAudioClips.crash);
-    //
-    //         if(currHealth != 0)
-    //         {
-    //             Destroy(collision.gameObject); 
-    //         }
-    //     }
-    //
-    //     if (collision.gameObject.CompareTag("Fuel"))
-    //     {
-    //         if(currHealth < MaxHealth)
-    //         {
-    //             currHealth += 1;
-    //             healthBar.SetHealth(currHealth);
-    //         }
-    //         else
-    //         {
-    //             currHealth = MaxHealth;
-    //             healthBar.SetHealth(currHealth);
-    //         }
-    //
-    //         AudioManager.instance.Play(EAudioClips.collectFuel);
-    //
-    //         Destroy(collision.gameObject);
-    //     }
-    // }
     
     public void RetryBtn()
     {
