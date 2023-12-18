@@ -7,7 +7,7 @@ public class Road : MonoBehaviour
     private Vector2 offset;
     // private static readonly int MainTex = Shader.PropertyToID("_MainTex");
 
-    void Start()
+    void Awake()
     {
         if (road == null)
             road = GetComponent<Renderer>();
