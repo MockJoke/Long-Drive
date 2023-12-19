@@ -26,6 +26,10 @@ public class ObjectMovement : MonoBehaviour
             {
                 Destroy(other.gameObject);
             }
+            else
+            {
+                Destroy(this.gameObject);
+            }
         }
     }
 }

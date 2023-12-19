@@ -1014,7 +1014,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   road: {fileID: 651749220}
-  speed: 0.75
+  speed: 4
 --- !u!1 &667700314
 GameObject:
   m_ObjectHideFlags: 0
@@ -1825,6 +1825,16 @@ PrefabInstance:
       propertyPath: RightTurnBtn
       value: 
       objectReference: {fileID: 79326655}
+    - target: {fileID: 4039070120591376109, guid: 4361eacd8565175449e6cb54dfafeea2,
+        type: 3}
+      propertyPath: accelerateBtn
+      value: 
+      objectReference: {fileID: 805952213}
+    - target: {fileID: 4039070120591376109, guid: 4361eacd8565175449e6cb54dfafeea2,
+        type: 3}
+      propertyPath: decelerateBtn
+      value: 
+      objectReference: {fileID: 2109813142}
     - target: {fileID: 8581061764599215491, guid: 4361eacd8565175449e6cb54dfafeea2,
         type: 3}
       propertyPath: m_Name
