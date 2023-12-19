@@ -8,6 +8,8 @@ public class PlayerCar : MonoBehaviour
     [Header("Controls")]
     [SerializeField] private GameObject LeftTurnBtn;
     [SerializeField] private GameObject RightTurnBtn;
+    [SerializeField] private GameObject accelerateBtn;
+    [SerializeField] private GameObject decelerateBtn;
     private int currControls = 0;
     private int currCar = 0;
     private bool goingLeft = false;
@@ -109,15 +111,27 @@ public class PlayerCar : MonoBehaviour
 
     private void UpdateControls()
     {
-        if (currControls == 1)
+        switch (currControls)
         {
-            LeftTurnBtn.SetActive(true);
-            RightTurnBtn.SetActive(true);
-        }
-        else
-        {
-            LeftTurnBtn.SetActive(false);
-            RightTurnBtn.SetActive(false);
+            case 1:
+                LeftTurnBtn.SetActive(true);
+                RightTurnBtn.SetActive(true);
+                accelerateBtn.SetActive(true);
+                decelerateBtn.SetActive(true);
+                break;
+            case 2:
+                LeftTurnBtn.SetActive(false);
+                RightTurnBtn.SetActive(false);
+                accelerateBtn.SetActive(false);
+                decelerateBtn.SetActive(false);
+                break;
+            case 3:
+            case 4:
+                LeftTurnBtn.SetActive(false);
+                RightTurnBtn.SetActive(false);
+                accelerateBtn.SetActive(true);
+                decelerateBtn.SetActive(true);
+                break;
         }
     }
 
