@@ -69,6 +69,7 @@ public class PlayerCar : MonoBehaviour
         
         PlayerCarImage.sprite = PlayerCars[currCar];
         
+        road.SetSpeed(currSpeed);
         objSpawner.SetSpeed(currSpeed);
         
         UpdateControls();
