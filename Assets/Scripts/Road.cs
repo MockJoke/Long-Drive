@@ -6,7 +6,7 @@ public class Road : MonoBehaviour
     [SerializeField] private float speed = 0.1f;
     // private static readonly int MainTex = Shader.PropertyToID("_MainTex");
 
-    void Start()
+    void Awake()
     {
         if (road == null)
             road = GetComponent<Renderer>();
