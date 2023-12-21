@@ -35,17 +35,13 @@ public class Garage : MonoBehaviour
         if(CarNo >= CarSprites.Length - 1)
         {
             CarNo = 0;
-            currCar = CarNo;
         }
         else if(CarNo < 0)
         {
             CarNo = CarSprites.Length - 1;
-            currCar = CarNo;
-        }
-        else
-        {
-            currCar = CarNo;
-        }
+        } 
+        
+        currCar = CarNo;
 
         PlayerCar.sprite = CarSprites[currCar];
         
