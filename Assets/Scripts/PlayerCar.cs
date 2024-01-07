@@ -44,6 +44,7 @@ public class PlayerCar : MonoBehaviour
     [SerializeField] private ObjectSpawner objSpawner;
     [SerializeField] private Road road;
 
+    #region Monobehaviour Methods
     void Awake()
     {
         if (rb == null)
@@ -108,7 +109,8 @@ public class PlayerCar : MonoBehaviour
         healthBar.SetHealth(MaxHealth);
         Time.timeScale = 1;
     }
-
+    #endregion
+    
     private void UpdateControls()
     {
         switch (currControls)
