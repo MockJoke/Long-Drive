@@ -24,11 +24,9 @@ namespace EasyUI.Helpers {
       [Header ("Toast Fade In/Out Duration :")]
       [Range (.1f, .8f)]
       [SerializeField] private float fadeDuration = .3f ;
-
-
+      
       private int maxTextLength = 300 ;
-
-
+      
       void Awake () {
          uiCanvasGroup.alpha = 0f ;
       }
@@ -40,8 +38,6 @@ namespace EasyUI.Helpers {
       public void Init (string text, float duration, Color color, ToastPosition position) {
          Show (text, duration, color, position) ;
       }
-
-
 
       private void Show (string text, float duration, Color color, ToastPosition position) {
          uiText.text = (text.Length > maxTextLength) ? text.Substring (0, maxTextLength) + "..." : text ;
@@ -94,5 +90,4 @@ namespace EasyUI.Helpers {
          EasyUI.Toast.Toast.isLoaded = false ;
       }
    }
-
 }
