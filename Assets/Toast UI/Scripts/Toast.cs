@@ -45,13 +45,10 @@ namespace EasyUI.Toast {
          }
       }
 
-
-
       public static void Show (string text) {
          Prepare () ;
          toastUI.Init (text, 2F, ToastColor.Black, ToastPosition.BottomCenter) ;
       }
-
 
       public static void Show (string text, float duration) {
          Prepare () ;
@@ -63,7 +60,6 @@ namespace EasyUI.Toast {
          toastUI.Init (text, duration, ToastColor.Black, position) ;
       }
 
-
       public static void Show (string text, ToastColor color) {
          Prepare () ;
          toastUI.Init (text, 2F, color, ToastPosition.BottomCenter) ;
@@ -73,7 +69,6 @@ namespace EasyUI.Toast {
          Prepare () ;
          toastUI.Init (text, 2F, color, position) ;
       }
-
 
       public static void Show (string text, Color color) {
          Prepare () ;
@@ -85,7 +80,6 @@ namespace EasyUI.Toast {
          toastUI.Init (text, 2F, color, position) ;
       }
 
-
       public static void Show (string text, float duration, ToastColor color) {
          Prepare () ;
          toastUI.Init (text, duration, color, ToastPosition.BottomCenter) ;
@@ -96,7 +90,6 @@ namespace EasyUI.Toast {
          toastUI.Init (text, duration, color, position) ;
       }
 
-
       public static void Show (string text, float duration, Color color) {
          Prepare () ;
          toastUI.Init (text, duration, color, ToastPosition.BottomCenter) ;
@@ -106,13 +99,9 @@ namespace EasyUI.Toast {
          Prepare () ;
          toastUI.Init (text, duration, color, position) ;
       }
-
-
-
+      
       public static void Dismiss () {
          toastUI.Dismiss () ; 
       }
-
    }
-
 }
