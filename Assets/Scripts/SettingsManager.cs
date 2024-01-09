@@ -6,13 +6,16 @@ using EasyUI.Toast;
 
 public class SettingsManager : MonoBehaviour
 {
-    [SerializeField] private Toggle MusicToggle;
+    // [SerializeField] private Toggle MusicToggle;
+    [SerializeField] private Button MusicToggle;
+    [SerializeField] private Sprite musicOnIcon;
+    [SerializeField] private Sprite musicOffIcon;
     private int controls = 1;
     public Action OnClose;
 
-    void Start()
+    private void OnEnable()
     {
-        SetMusicToggle();
+        SetMusicBtnUI();
     }
 
     public void ButtonsBtn()
@@ -59,14 +62,18 @@ public class SettingsManager : MonoBehaviour
         OnClose = null;
     }
 
-    private void SetMusicToggle()
+    private void SetMusicBtnUI()
     {
-        MusicToggle.isOn = PlayerPrefs.GetInt("Muted") != 1;
+        MusicToggle.image.sprite = AudioManager.instance.isMuted ? musicOffIcon : musicOnIcon;
+
+        // MusicToggle.isOn = PlayerPrefs.GetInt("Muted") != 1;
     }
     
     public void MusicBtn()
     {
         AudioManager.instance.ToggleMusic();
+        
+        SetMusicBtnUI();
     }
     
     public void PlayBtn()

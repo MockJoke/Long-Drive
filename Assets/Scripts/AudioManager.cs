@@ -77,13 +77,18 @@ public class AudioManager : MonoBehaviour
     private void SetMusicListener()
     {
         isMuted = PlayerPrefs.GetInt("Muted") == 1;
-        AudioListener.pause = isMuted;
+        SetMusicState();
     }
     
     public void ToggleMusic()
     {
         isMuted = !isMuted;
-        AudioListener.pause = isMuted;
         PlayerPrefs.SetInt("Muted", isMuted ? 1 : 0);
+        SetMusicState();
+    }
+
+    private void SetMusicState()
+    {
+        AudioListener.pause = isMuted;
     }
 }
