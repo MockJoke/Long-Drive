@@ -32,6 +32,7 @@ public class PlayerCar : MonoBehaviour
     [SerializeField] private HealthBar healthBar;
     private int currHealth;
     private int score;
+    private int highScore = 0;
     private int money;
     private int accountBalance;
     private float gameTime;
@@ -69,6 +70,8 @@ public class PlayerCar : MonoBehaviour
 
         currCar = PlayerPrefs.GetInt("CurrentCar");
         accountBalance = PlayerPrefs.GetInt("AccountBalance", 0);
+
+        highScore = PlayerPrefs.GetInt("HighScore");
         
         PlayerCarImage.sprite = PlayerCars[currCar];
         
@@ -90,7 +93,8 @@ public class PlayerCar : MonoBehaviour
             gameplayUI.ToggleRetryCanvas(true);
 
             gameplayUI.UpdateScore(score);
-
+            CheckHighScore();
+            
             money = score / 5;
             gameplayUI.UpdateMoney(money);
             
@@ -151,6 +155,17 @@ public class PlayerCar : MonoBehaviour
                 MoveOnSensor();
                 break;
         }
+    }
+
+    private void CheckHighScore()
+    {
+        if (score > highScore)
+        {
+            highScore = score;
+            PlayerPrefs.SetInt("HighScore", highScore);
+        }
+        
+        gameplayUI.UpdateHighScore(highScore);
     }
 
     void OnTriggerEnter2D(Collider2D other)

@@ -13,8 +13,9 @@ public class GameplayUI : MonoBehaviour
     
     [Header("Fields")]
     [SerializeField] private TextMeshProUGUI ScoreBoard; 
+    [SerializeField] private TextMeshProUGUI HighScoreBoard; 
     [SerializeField] private TextMeshProUGUI MoneyReceived;
-
+    
     private void Awake()
     {
         if (settingsManager == null)
@@ -29,6 +30,11 @@ public class GameplayUI : MonoBehaviour
     public void UpdateMoney(int value)
     {
         MoneyReceived.text = "MONEY: " + value;
+    }
+
+    public void UpdateHighScore(float value)
+    {
+        HighScoreBoard.text = "HIGH-SCORE: " + value;
     }
 
     public void ToggleRetryCanvas(bool b)
