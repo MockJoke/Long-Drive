@@ -813,7 +813,7 @@ MonoBehaviour:
   sounds:
   - name: 1
     clip: {fileID: 8300000, guid: 07e6106fe603f454c8e912ecaa72bc04, type: 3}
-    volume: 1
+    volume: 0.375
     pitch: 1
     loop: 1
     source: {fileID: 0}
