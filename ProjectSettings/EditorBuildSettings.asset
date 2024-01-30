@@ -17,4 +17,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Garage.unity
     guid: dbf65cae20598504387f2abd593a4c57
+  - enabled: 1
+    path: Assets/Scenes/EnvironmentSelection.unity
+    guid: bd2bcf5edcd963c459a6483ee94e5405
+  - enabled: 1
+    path: Assets/Scenes/RoadSelection.unity
+    guid: bd2bcf5edcd963c459a6483ee94e5405
   m_configObjects: {}

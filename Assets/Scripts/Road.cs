@@ -3,6 +3,7 @@
 public class Road : MonoBehaviour
 {
     [SerializeField] private Renderer road;
+    [SerializeField] private Material[] roadMaterials;
     [SerializeField] private float speed = 0.1f;
     // private static readonly int MainTex = Shader.PropertyToID("_MainTex");
 
@@ -10,6 +11,12 @@ public class Road : MonoBehaviour
     {
         if (road == null)
             road = GetComponent<Renderer>();
+    }
+
+    void Start()
+    {
+        int roadIndex = PlayerPrefs.GetInt("CurrentRoad", 0);
+        road.material = roadMaterials[roadIndex];
     }
 
     void Update()

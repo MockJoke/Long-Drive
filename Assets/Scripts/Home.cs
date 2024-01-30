@@ -22,6 +22,11 @@ public class Home : MonoBehaviour
     {
         SceneManager.LoadScene("Garage");
     }
+    
+    public void RoadSelectionBtn()
+    {
+        SceneManager.LoadScene("RoadSelection");
+    }
 
     public void SettingsBtn()
     {

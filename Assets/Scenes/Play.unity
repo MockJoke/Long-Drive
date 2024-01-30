@@ -1015,6 +1015,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   road: {fileID: 651749220}
+  roadMaterials:
+  - {fileID: 2100000, guid: d34bd302bd7300d41b6c0cb6c23e06d5, type: 2}
+  - {fileID: 2100000, guid: d06eb1529aa68014f803db06e0b8ef1f, type: 2}
+  - {fileID: 2100000, guid: 5e62eb39350373d43b3dc46f0c92ebff, type: 2}
+  - {fileID: 2100000, guid: c69e1873ea2ac544f8eca1d77112f94c, type: 2}
   speed: 4
 --- !u!1 &667700314
 GameObject:
