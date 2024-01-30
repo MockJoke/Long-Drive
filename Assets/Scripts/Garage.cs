@@ -32,7 +32,7 @@ public class Garage : MonoBehaviour
 
     private void ShowCar(int CarNo)
     {
-        if(CarNo >= CarSprites.Length - 1)
+        if(CarNo > CarSprites.Length - 1)
         {
             CarNo = 0;
         }
