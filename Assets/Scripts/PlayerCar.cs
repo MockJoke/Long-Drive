@@ -25,7 +25,6 @@ public class PlayerCar : MonoBehaviour
     [SerializeField] private float rotationResetSpeed = 10f;
     [SerializeField] private float maxLeftBoundary = -2.2f;
     [SerializeField] private float maxRightBoundary = 2.2f;
-    // private float carRotation = 0f;
     
     [Header("Info UI")]
     [SerializeField] private int MaxHealth = 10;
@@ -63,15 +62,15 @@ public class PlayerCar : MonoBehaviour
 
     void Start()
     {
-        currControls = PlayerPrefs.GetInt("controls");
+        currControls = PlayerPrefs.GetInt("controls", 2);
 
         currHealth = MaxHealth;
         healthBar.SetMaxHealth(MaxHealth);
 
-        currCar = PlayerPrefs.GetInt("CurrentCar");
+        currCar = PlayerPrefs.GetInt("CurrentCar", 0);
         accountBalance = PlayerPrefs.GetInt("AccountBalance", 0);
 
-        highScore = PlayerPrefs.GetInt("HighScore");
+        highScore = PlayerPrefs.GetInt("HighScore", 0);
         
         PlayerCarImage.sprite = PlayerCars[currCar];
         
@@ -87,7 +86,7 @@ public class PlayerCar : MonoBehaviour
         
         if (currHealth <= 0)
         {
-            Time.timeScale = 0;     //to make game into pause mode
+            Time.timeScale = 0;
 
             gameplayUI.ToggleGameplayCanvas(false);
             gameplayUI.ToggleRetryCanvas(true);
