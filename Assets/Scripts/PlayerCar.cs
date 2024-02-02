@@ -73,6 +73,9 @@ public class PlayerCar : MonoBehaviour
         highScore = PlayerPrefs.GetInt("HighScore", 0);
         
         PlayerCarImage.sprite = PlayerCars[currCar];
+
+        currSpeed = 4f;
+        SetMaxSpeed();
         
         road.SetSpeed(currSpeed);
         objSpawner.SetSpeed(currSpeed);
@@ -154,6 +157,27 @@ public class PlayerCar : MonoBehaviour
                 MoveOnSensor();
                 break;
         }
+    }
+
+    private void SetMaxSpeed()
+    {
+        switch (road.currRoad)
+        {
+            case 0:
+                maxSpeed = 8f;
+                break;
+            case 1:
+                maxSpeed = 5.5f;
+                break;
+            case 2:
+                maxSpeed = 3f;
+                break;
+            case 3:
+                maxSpeed = 4f;
+                break;
+        }
+
+        currSpeed = Mathf.Clamp(currSpeed, minSpeed, maxSpeed);
     }
 
     private void CheckHighScore()
