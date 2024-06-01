@@ -13,7 +13,7 @@ a long drive (made using Unity game engine)
   <img src="README-Resources/RoadSelection-Menu.png" alt="RoadSelection-Menu" height="300px">
   <img src="README-Resources/Settings-Menu.png" alt="Settings-Menu" height="300px">
   <img src="README-Resources/Pause-Menu.png" alt="Pause-Menu" height="300px">
-  <img src="README-Resources/Garage-Menu.png" alt="Gameplay" height="300px">
+  <img src="README-Resources/Gameplay.png" alt="Gameplay" height="300px">
   <img src="README-Resources/GameOver-Screen.png" alt="GameOver-Screen" height="300px">
 </div>
 <div align="center">
