@@ -35,7 +35,7 @@ a long drive (made using Unity game engine)
 - Random vehicles & collectibles generation
 - An audio system (using singleton design pattern)
 - A save system to keep track of score, inventory money, chosen controls (using PlayerPrefs)
-- UI/UX for game start, over, pause, score, settings etc.
+- UI/UX for game start, over, pause, settings, score, health etc.
 - A toast message UI to notify users about their selections on mobile devices
 
 ### TODO:
