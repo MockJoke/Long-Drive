@@ -44,7 +44,10 @@ a long drive (made using Unity game engine)
 
 ## Credits & Attributions
 
-[//]: # (#### Graphics:)
+#### Graphics:
+
+- https://opengameart.org/content/2d-race-cars
+- https://opengameart.org/content/free-top-down-car-sprites-by-unlucky-studio
 
 [//]: # ()
 [//]: # (#### Sounds:)
