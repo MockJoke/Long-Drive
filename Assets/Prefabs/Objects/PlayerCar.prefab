@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -1.75, z: 0}
-  m_LocalScale: {x: 0.225, y: 0.175, z: 1}
+  m_LocalScale: {x: 0.175, y: 0.155, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5ab9baa7ce84d7841a4535a7287d5839, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3dd4f0dd70334784ca582999e2d97917, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -146,18 +146,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.015028715, y: -0.1504736}
+  m_Offset: {x: -0.015028715, y: -0.06227827}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4.63, y: 10.1}
+    oldSize: {x: 5.12, y: 10.24}
     newSize: {x: 4.63, y: 10.1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4.0512958, y: 9.862431}
+  m_Size: {x: 4.0512958, y: 9.68604}
   m_EdgeRadius: 0
 --- !u!114 &4039070120591376109
 MonoBehaviour:
@@ -188,16 +188,16 @@ MonoBehaviour:
   healthBar: {fileID: 0}
   PlayerCarImage: {fileID: 8988454966898669906}
   PlayerCars:
-  - {fileID: 21300000, guid: 5ab9baa7ce84d7841a4535a7287d5839, type: 3}
-  - {fileID: 21300000, guid: d4eb23c7d0cf75248adb680577346c69, type: 3}
-  - {fileID: 21300000, guid: df007c66f5d009044bd5233d3e0903c5, type: 3}
-  - {fileID: 21300000, guid: 0926a54ed1c68c248b1545c0824a7933, type: 3}
-  - {fileID: 21300000, guid: 9f69b4498e6f8c84babc565d1ff552b4, type: 3}
-  - {fileID: 21300000, guid: 09638d5173073204480bb9fbaafc745a, type: 3}
-  - {fileID: 21300000, guid: b0e7848bfdfe63b4cb0836340e6d0145, type: 3}
-  - {fileID: 21300000, guid: 53ad47ba880c4b344a3c96f675b34df1, type: 3}
-  - {fileID: 21300000, guid: ebc351e63905def439622e6b5b22a3cc, type: 3}
-  - {fileID: 21300000, guid: c0769e0efd798b24ca68def52f39de2b, type: 3}
+  - {fileID: 21300000, guid: 3dd4f0dd70334784ca582999e2d97917, type: 3}
+  - {fileID: 21300000, guid: 1f933e3eb1cb9427c90663457a8721cc, type: 3}
+  - {fileID: 21300000, guid: 8da3d3b1471a747bf88d06a643cf1e15, type: 3}
+  - {fileID: 21300000, guid: c3175ef48e96549649bb4f03fb4d1edc, type: 3}
+  - {fileID: 21300000, guid: 80fbe2bc9e63140e7942abbfa08e4cf8, type: 3}
+  - {fileID: 21300000, guid: 4e88263667bf84545b3be4e62af6cd06, type: 3}
+  - {fileID: 21300000, guid: 59bd34a62f23848bcb5f01e90f4e2eff, type: 3}
+  - {fileID: 21300000, guid: b62a53f43df834a6a877c2ad49d84769, type: 3}
+  - {fileID: 21300000, guid: e99949c282dd34777995326a22e6eede, type: 3}
+  - {fileID: 21300000, guid: 5157ade10701b45269045a761cd5162a, type: 3}
   gameplayUI: {fileID: 0}
   objSpawner: {fileID: 0}
   road: {fileID: 0}
