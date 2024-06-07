@@ -17,7 +17,7 @@ a long drive (made using Unity game engine)
   <img src="README-Resources/GameOver-Screen.png" alt="GameOver-Screen" height="300px">
 </div>
 <div align="center">
-  <a href="https://youtu.be/5WXNAoNZvwg" target="_blank">See Demo Video</a>
+  <a href="https://youtu.be/5WXNAoNZvwg" target="_blank">Demo Video</a>
 </div>
 
 [//]: # (https://user-images.githubusercontent.com/42877499/145081422-d29a8b6e-bc0c-45b3-88fa-059ba84e573f.mp4)
