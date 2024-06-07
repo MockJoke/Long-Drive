@@ -28,8 +28,8 @@ a long drive (made using Unity game engine)
 
 - A garage section to choose the car & a road selection menu to choose the environment
 - Availability of multiple control inputs:
-  1. Buttons (PC & Mobile)
-  2. keyboard Keys (PC)
+  1. Buttons (Mobile)
+  2. keyboard Keys (External Keypad)
   3. Touch (Mobile)
   4. Sensors (Mobile)
 - Random vehicles & collectibles generation
