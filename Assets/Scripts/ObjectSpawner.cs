@@ -4,15 +4,16 @@ using Random = UnityEngine.Random;
 public class ObjectSpawner : MonoBehaviour
 {
     [SerializeField] private ObjectMovement[] objPool = new ObjectMovement[9];
-    [SerializeField] private float delayTimer = 5f;
+    [SerializeField] private float delayTimerMin = 0.5f;
+    [SerializeField] private float delayTimerMax = 3f;
     [SerializeField] private float leftBoundary = -2.2f;
     [SerializeField] private float rightBoundary = 2.2f;
     private float timer = 0f;
     
     void Start()
     {
-        // InvokeRepeating(nameof(GenerateObj), 0f, 5f);
-        timer = delayTimer;
+        // InvokeRepeating(nameof(GenerateObj), 0f, Random.Range(delayTimerMin, delayTimerMax));
+        timer = Random.Range(delayTimerMin, delayTimerMax);
     }
 
     void Update()
@@ -23,7 +24,7 @@ public class ObjectSpawner : MonoBehaviour
         {
             GenerateObj();
 
-            timer = delayTimer;
+            timer = Random.Range(delayTimerMin, delayTimerMax);
         }
     }
 
