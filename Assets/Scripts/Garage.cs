@@ -20,11 +20,11 @@ public class Garage : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.RightArrow))
+        if(Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
         {
             ShowCar(currCar + 1);
         }
-        else if(Input.GetKeyDown(KeyCode.LeftArrow))
+        else if(Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
         {
             ShowCar(currCar - 1);
         }

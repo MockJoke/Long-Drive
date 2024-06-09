@@ -21,11 +21,11 @@ public class RoadSelection : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.RightArrow))
+        if(Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
         {
             ShowRoad(currRoad + 1);
         }
-        else if(Input.GetKeyDown(KeyCode.LeftArrow))
+        else if(Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
         {
             ShowRoad(currRoad - 1);
         }

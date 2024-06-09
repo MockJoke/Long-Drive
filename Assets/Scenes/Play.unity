@@ -142,37 +142,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 5296814714309312870}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &452485096
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 452485097}
-  m_Layer: 0
-  m_Name: Obstacles
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &452485097
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 452485096}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -407,7 +376,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 0
 --- !u!4 &667700315
 Transform:
@@ -859,7 +828,8 @@ MonoBehaviour:
   - {fileID: 4335841145147662835, guid: 41f301a28e516ae44a09cce225425226, type: 3}
   - {fileID: 2277851919692094758, guid: 210d960776226564c82bde584b421a8f, type: 3}
   - {fileID: 8537007935552633688, guid: 9341c4a5b3c4dda4c9b71384eb4ff375, type: 3}
-  delayTimer: 5
+  delayTimerMin: 0.5
+  delayTimerMax: 3
   leftBoundary: -2.2
   rightBoundary: 2.2
 --- !u!4 &982278374
@@ -1014,7 +984,7 @@ GameObject:
   m_TagString: DownBarrier
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1049181244
 Transform:
@@ -1305,7 +1275,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 0
 --- !u!4 &1757414159
 Transform:
@@ -1833,7 +1803,6 @@ SceneRoots:
   - {fileID: 651749222}
   - {fileID: 1560087859}
   - {fileID: 982278374}
-  - {fileID: 452485097}
   - {fileID: 1001527876}
   - {fileID: 667700315}
   - {fileID: 1757414159}
