@@ -5,7 +5,7 @@ a long drive (made using Unity game engine)
 
 ## Demo
 
-[//]: # ([Download from itch.io]&#40;https://kharva.itch.io/helix-jump&#41;)
+[Download from itch.io](https://kharva.itch.io/long-drive)
 
 <div align="center">
   <img src="README-Resources/Home-Menu.png" alt="Home-Menu" height="300px">
@@ -16,6 +16,9 @@ a long drive (made using Unity game engine)
   <img src="README-Resources/Gameplay.png" alt="Gameplay" height="300px">
   <img src="README-Resources/GameOver-Screen.png" alt="GameOver-Screen" height="300px">
 </div>
+
+<br>
+
 <div align="center">
   <a href="https://youtu.be/5WXNAoNZvwg" target="_blank">Demo Video</a>
 </div>
